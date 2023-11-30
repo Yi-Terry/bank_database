@@ -44,6 +44,7 @@ public class VariousQueriesAndScannerFinalProject {
 		//calls the buttons 
 		customerAccountButton();
 		signInButton();
+		appointmentButton();
 	}
 	
 
@@ -187,6 +188,22 @@ public class VariousQueriesAndScannerFinalProject {
 			});
 		}
 		
+		public void appointmentButton()
+		{
+			JButton button3 = new JButton("Make Appointment");
+			button3.setBounds(62,135,310,29);
+			frame.getContentPane().add(button3);
+			button3.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					appointmentPage();
+				}
+				
+			});
+		}
+		
 		
 		//frame changers
 		public void goToCustomerPage()
@@ -201,6 +218,15 @@ public class VariousQueriesAndScannerFinalProject {
 		{
 			frame.dispose();
 			signInUI SIP = new signInUI();
+			SIP.initialize();
+			SIP.frame.setVisible(true);
+			
+		}
+		
+		public void appointmentPage()
+		{
+			frame.dispose();
+			appointmentUI SIP = new appointmentUI();
 			SIP.initialize();
 			SIP.frame.setVisible(true);
 			
