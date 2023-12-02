@@ -12,6 +12,8 @@ public class bankAccountUI {
 	JFrame frame;
 	private JTextField textField;
 	private JTextField textField_1;
+	JLabel totalLabel;
+	int total;
 
 	/**
 	 * Launch the application.
@@ -47,24 +49,13 @@ public class bankAccountUI {
 		
 		//calls functions
 		createTotalLabel();
+		totalAmount();
 		createDepositLabel();
 		createWithDrawlLabel();
 		createDepositButton();
 		createWithDrawlButton();
 		createDepositTF();
 		createWithDrawlTF();
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	
 	}
 	
 	
@@ -87,6 +78,16 @@ public class bankAccountUI {
 		withDrawlLabel.setBounds(174, 183, 88, 16);
 		frame.getContentPane().add(withDrawlLabel);
 	}
+	//total amount LABEL function
+	public void totalAmount() {
+		//makes label
+		totalLabel = new JLabel("Total Amount: " + Integer.toString(total));
+		totalLabel.setBounds(174, 40, 120, 16);
+		frame.getContentPane().add(totalLabel);
+		//updates label using function
+		updateTotalLabel();
+		
+	}
 	
 	
 	//Creates buttons
@@ -99,7 +100,12 @@ public class bankAccountUI {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				//creates int deposit that takes text value from field and converts to int
+				int deposit = Integer.parseInt(textField.getText());
+				//adds deposit amount from total and saves back into the total
+				total += deposit;
+				//updates label
+				updateTotalLabel();
 				
 			}
 			
@@ -112,9 +118,20 @@ public class bankAccountUI {
 		withdrawlBT.setBounds(145, 226, 117, 29);
 		frame.getContentPane().add(withdrawlBT);
 		withdrawlBT.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
+				//creates int withdrawl that takes text value of field and converts to int
+				int withdrawl = Integer.parseInt(textField_1.getText());
+				//subtracts withdrawl amount from total and saves back into the total
+				total -= withdrawl;
+				//updates label
+				updateTotalLabel();
 			}
 		});
+	}
+	//this function takes all the updates after submitting deposits/withdrawls and updates the total amount label with changes
+	public void updateTotalLabel() {
+		totalLabel.setText("Total Amount: " + total);
 	}
 	
 	
@@ -132,6 +149,8 @@ public class bankAccountUI {
 		frame.getContentPane().add(textField_1);
 		textField_1.setColumns(10);
 	}
+	
+	
 	
 	
 	
