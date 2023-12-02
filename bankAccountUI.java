@@ -54,6 +54,7 @@ public class bankAccountUI {
 		createWithDrawlLabel();
 		createDepositButton();
 		createWithDrawlButton();
+		createBackButton();
 		createDepositTF();
 		createWithDrawlTF();
 	}
@@ -129,6 +130,31 @@ public class bankAccountUI {
 			}
 		});
 	}
+	
+	public void createBackButton() {
+		JButton backBT = new JButton("< Back");
+		backBT.setBounds(6, 237, 117, 29);
+		frame.getContentPane().add(backBT);
+		backBT.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				signInPage();
+			}
+		});
+		
+	}
+	
+	
+	public void signInPage()
+	{
+		frame.dispose();
+		signInUI SIP = new signInUI();
+		SIP.initialize();
+		SIP.frame.setVisible(true);
+		
+	}
+	
+	
+	
 	//this function takes all the updates after submitting deposits/withdrawls and updates the total amount label with changes
 	public void updateTotalLabel() {
 		totalLabel.setText("Total Amount: " + total);

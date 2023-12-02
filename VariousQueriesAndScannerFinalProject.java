@@ -9,7 +9,7 @@ import javax.swing.JFrame;
 
 public class VariousQueriesAndScannerFinalProject {
 	
-	private JFrame frame;
+	JFrame frame;
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -31,7 +31,7 @@ public class VariousQueriesAndScannerFinalProject {
 
 	public VariousQueriesAndScannerFinalProject() { initialize(); }
 
-	private void initialize() {
+	public void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 253);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -45,6 +45,7 @@ public class VariousQueriesAndScannerFinalProject {
 		customerAccountButton();
 		signInButton();
 		appointmentButton();
+	
 	}
 	
 
@@ -58,6 +59,21 @@ public class VariousQueriesAndScannerFinalProject {
 					} catch (SQLException e) { e.printStackTrace(); }
 		        }
 		    }, "Shutdown-thread"));
+		}
+		
+		public static void getNumberOfRows() {
+			try {
+				Connection connection = Database.connection; // Connect to database
+				String query = "SELECT COUNT(*) FROM Customers"; // Enter the query
+				Statement stm = connection.createStatement(); // Create statement
+				ResultSet result = stm.executeQuery(query); // Execute the query
+				
+				while (result.next()) {
+					System.out.println("Number of rows in Customers table: " + result.getInt("COUNT(*)"));
+				}
+			} catch (Exception e) {
+				System.out.println(e);
+			}
 		}
 		
 		
@@ -231,6 +247,7 @@ public class VariousQueriesAndScannerFinalProject {
 			SIP.frame.setVisible(true);
 			
 		}
+		
 		
 		
 		

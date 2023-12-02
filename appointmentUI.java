@@ -58,6 +58,7 @@ public class appointmentUI {
 		frame.getContentPane().setLayout(null);
 		
 		createAppointmentButton();
+		createBackButton();
 		createCustomerIDTF();
 		createDateTF();
 		createTimeTF();
@@ -81,6 +82,27 @@ public class appointmentUI {
 			
 		});
 }
+	
+	public void createBackButton() {
+		JButton backBT = new JButton("< Back");
+		backBT.setBounds(6, 237, 117, 29);
+		frame.getContentPane().add(backBT);
+		backBT.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				homePage();
+			}
+		});
+		
+	}
+	
+	//frame changer
+	public void homePage() {
+		frame.dispose();
+		VariousQueriesAndScannerFinalProject main = new VariousQueriesAndScannerFinalProject();
+		main.initialize();
+		main.frame.setVisible(true);
+		
+	}
 	
 	//creates text field
 	public void createCustomerIDTF() {
@@ -126,7 +148,7 @@ public class appointmentUI {
 		frame.getContentPane().add(timeLabel);
 	}
 	
-	int randomEmployeeID = (int) (Math.random()*50 +1);
+	int randomAppointmentID = (int) (Math.random()*50 +1);
 	
 	//makes appointment into database
 	public void createAppointment() {
@@ -136,11 +158,11 @@ public class appointmentUI {
 		String query = "INSERT INTO Appointments VALUES (?, ?, ?, ?, ?)";
 		PreparedStatement stm = connection.prepareStatement(query);
 		
-		stm.setInt(1, randomEmployeeID);
-		stm.setInt(2,  Integer.parseInt(customerIDTF.getText()));
-		stm.setString(3, dateTF.getText());
-		stm.setString(4, timeTF.getText());
-		stm.setInt(5, randomEmployeeID);
+		stm.setInt(1, randomAppointmentID);
+		stm.setString(2, dateTF.getText());
+		stm.setString(3, timeTF.getText());
+		stm.setInt(4, Integer.parseInt(customerIDTF.getText()));
+		stm.setInt(5, 1);
 		stm.executeUpdate();
 		
 		JOptionPane.showMessageDialog(null, "New Appointment made!", "Appointment Added!", JOptionPane.DEFAULT_OPTION);

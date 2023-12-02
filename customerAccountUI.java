@@ -51,6 +51,7 @@ public class customerAccountUI {
 		frame.getContentPane().setLayout(null);		
 		
 		createAddCustomerButton();
+		createBackButton();
 		createUserNameLabel();
 		createUserNameTF();
 		createPassWordLabel();
@@ -75,6 +76,19 @@ public class customerAccountUI {
 			
 		});
 		}
+		
+		public void createBackButton() {
+			JButton backBT = new JButton("< Back");
+			backBT.setBounds(6, 237, 117, 29);
+			frame.getContentPane().add(backBT);
+			backBT.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					homePage();
+				}
+			});
+			
+		}
+		
 		
 		//creates labels
 		public void createUserNameLabel() {
@@ -134,6 +148,14 @@ public class customerAccountUI {
 		}
 		
 		
+		//frame Changer
+		public void homePage() {
+			frame.dispose();
+			VariousQueriesAndScannerFinalProject main = new VariousQueriesAndScannerFinalProject();
+			main.initialize();
+			main.frame.setVisible(true);
+			
+		}
 		
 		
 		

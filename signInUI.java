@@ -57,7 +57,7 @@ public class signInUI {
 		createUserNameTF();
 		createPassWordLabel();
 		createPassWordTF();
-		
+		createBackButton();
 	
 	}
 	
@@ -74,6 +74,18 @@ public class signInUI {
 			}
 		});
 	}
+	
+	public void createBackButton() {
+	JButton backBT = new JButton("< Back");
+	backBT.setBounds(6, 237, 117, 29);
+	frame.getContentPane().add(backBT);
+	backBT.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			homePage();
+		}
+	});
+	
+}
 	
 	//creates labels
 	public void createUserNameLabel()
@@ -102,6 +114,7 @@ public class signInUI {
 		textField_1.setBounds(148, 136, 155, 26);
 		frame.getContentPane().add(textField_1);
 		textField_1.setColumns(10);
+		
 	}
 	
 	
@@ -121,6 +134,14 @@ public class signInUI {
 		bankAccountUI BP = new bankAccountUI();
 		BP.initialize();
 		BP.frame.setVisible(true);
+		
+	}
+	
+	public void homePage() {
+		frame.dispose();
+		VariousQueriesAndScannerFinalProject main = new VariousQueriesAndScannerFinalProject();
+		main.initialize();
+		main.frame.setVisible(true);
 		
 	}
 	
@@ -160,7 +181,4 @@ public class signInUI {
 		
 		
 	}
-	
-	
-	
 }
