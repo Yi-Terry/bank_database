@@ -65,6 +65,7 @@ public class appointmentUI {
 		createCustomerIDLabel();
 		createDateLabel();
 		createTimeLabel();	
+		test();
 	}
 	
 	//creates button	
@@ -150,6 +151,10 @@ public class appointmentUI {
 	
 	int randomAppointmentID = (int) (Math.random()*50 +1);
 	
+	
+	public void test() {
+		System.out.println(randomAppointmentID);
+	}
 	//makes appointment into database
 	public void createAppointment() {
 		

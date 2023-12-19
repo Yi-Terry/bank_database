@@ -146,6 +146,7 @@ public class signInUI {
 	}
 	
 	//login button
+	//uses query to compare if username and password matches these varaibles in the database
 	public void loginButton()
 	{
 		try {

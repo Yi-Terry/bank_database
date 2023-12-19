@@ -45,6 +45,7 @@ public class VariousQueriesAndScannerFinalProject {
 		customerAccountButton();
 		signInButton();
 		appointmentButton();
+		employeeSignInButton();
 	
 	}
 	
@@ -173,7 +174,7 @@ public class VariousQueriesAndScannerFinalProject {
 		
 		//Buttons for main menu
 		public void customerAccountButton() {
-			JButton button1 = new JButton("Customer");
+			JButton button1 = new JButton("Create Customer Account");
 			button1.setBounds(62,53,310,29);
 			frame.getContentPane().add(button1);
 			button1.addActionListener(new ActionListener() {
@@ -190,7 +191,7 @@ public class VariousQueriesAndScannerFinalProject {
 		
 		public void signInButton()
 		{
-			JButton button2 = new JButton("Sign In");
+			JButton button2 = new JButton("Customer Sign In");
 			button2.setBounds(62,94,310,29);
 			frame.getContentPane().add(button2);
 			button2.addActionListener(new ActionListener() {
@@ -215,6 +216,22 @@ public class VariousQueriesAndScannerFinalProject {
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
 					appointmentPage();
+				}
+				
+			});
+		}
+		
+		public void employeeSignInButton()
+		{
+			JButton button3 = new JButton("Employee Sign In");
+			button3.setBounds(62,176,310,29);
+			frame.getContentPane().add(button3);
+			button3.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					employeePage();
 				}
 				
 			});
@@ -246,6 +263,13 @@ public class VariousQueriesAndScannerFinalProject {
 			SIP.initialize();
 			SIP.frame.setVisible(true);
 			
+		}
+		
+		public void employeePage() {
+			frame.dispose();
+			employeeSignInUI ESI = new employeeSignInUI();
+			ESI.initialize();
+			ESI.frame.setVisible(true);
 		}
 		
 		

@@ -163,20 +163,22 @@ public class customerAccountUI {
 		//random number for id
 		int random = (int) (Math.random()*49 + 1);
 		
+		//uses query to send data to database
 		public void addCustomer() {
 			try {
 				Connection connection = Database.connection;
 				String query = "INSERT INTO Customers VALUES (?, ?, ?, ?, ?, ?)";
 				PreparedStatement stm = connection.prepareStatement(query);
 				
-				// 'Integer.parseInt(Insert String Here)' turns the 'String' between the parenthesis into an 'int' (unless there are letters inside of the String, then it will crash)
-				stm.setInt(1,  random); // patientIDTF.getText() gets the text that is inside of the patient id text field
-				stm.setString(2, textField_2.getText()); // patientNameTF.getText() gets the text that is inside of the patient name text field
-				stm.setString(3, textField.getText()); // dateOfBirthTF.getText() gets the text that is inside of the dateOfBirth text field
+				
+				stm.setInt(1,  random);
+				stm.setString(2, textField_2.getText()); 
+				stm.setString(3, textField.getText()); 
 				stm.setString(4, textField_1.getText());
 				stm.setString(5, textField_3.getText());
 				stm.setInt(6, random);
 				stm.executeUpdate();
+				
 				// The line below is ran if the query executes successfully. It shows a JOptionPane (an alert) telling the user that the patient has been added to the database.
 				JOptionPane.showMessageDialog(null, "The new customer was added to the database!", "Customer Added!", JOptionPane.DEFAULT_OPTION);
 			} catch (Exception e) {

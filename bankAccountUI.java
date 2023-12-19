@@ -3,8 +3,11 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.awt.event.ActionEvent;
 
 public class bankAccountUI {
@@ -14,6 +17,8 @@ public class bankAccountUI {
 	private JTextField textField_1;
 	JLabel totalLabel;
 	int total;
+	public int deposit;
+	private JTextField customerIDTF;
 
 	/**
 	 * Launch the application.
@@ -57,6 +62,8 @@ public class bankAccountUI {
 		createBackButton();
 		createDepositTF();
 		createWithDrawlTF();
+		customerIDLabel();
+		createCustomerIDTF();
 	}
 	
 	
@@ -70,7 +77,7 @@ public class bankAccountUI {
 	
 	public void createDepositLabel() {
 		JLabel depositLabel = new JLabel("Deposit");
-		depositLabel.setBounds(174, 84, 61, 16);
+		depositLabel.setBounds(174, 89, 61, 16);
 		frame.getContentPane().add(depositLabel);
 	}
 	
@@ -89,17 +96,23 @@ public class bankAccountUI {
 		updateTotalLabel();
 		
 	}
+	public void customerIDLabel() {
+		customerIDTF = new JTextField();
+		customerIDTF.setBounds(6, 35, 130, 26);
+		frame.getContentPane().add(customerIDTF);
+		customerIDTF.setColumns(10);
+	}
 	
 	
 	//Creates buttons
 	public void createDepositButton() {
 
-		JButton depositBT = new JButton("Submit");
+		JButton depositBT = new JButton("Deposit");
 		depositBT.setBounds(145, 142, 117, 29);
 		frame.getContentPane().add(depositBT);
 		depositBT.addActionListener(new ActionListener() {
 
-			@Override
+			
 			public void actionPerformed(ActionEvent e) {
 				//creates int deposit that takes text value from field and converts to int
 				int deposit = Integer.parseInt(textField.getText());
@@ -107,15 +120,33 @@ public class bankAccountUI {
 				total += deposit;
 				//updates label
 				updateTotalLabel();
+				depositButton();
 				
 			}
 			
 		});
 	}
 	
+	public void depositButton() {
+		try {
+			Connection connection = Database.connection;
+			String query = "UPDATE BankAccounts SET balance = ? WHERE customer_id = ?";
+			PreparedStatement stm = connection.prepareStatement(query);
+			stm.setInt(1, total + deposit);
+			stm.setString(2,  customerIDTF.getText());
+			stm.executeUpdate();
+			
+			JOptionPane.showMessageDialog(null, "New Deposit made!", "Deposit Added!", JOptionPane.DEFAULT_OPTION);
+			
+		}catch(Exception e) {
+			System.out.println(e);
+			
+		}
+	}
+	
 	
 	public void createWithDrawlButton() {
-		JButton withdrawlBT = new JButton("Submit");
+		JButton withdrawlBT = new JButton("Withdrawl");
 		withdrawlBT.setBounds(145, 226, 117, 29);
 		frame.getContentPane().add(withdrawlBT);
 		withdrawlBT.addActionListener(new ActionListener() {
@@ -144,6 +175,8 @@ public class bankAccountUI {
 	}
 	
 	
+	
+	//frame changer
 	public void signInPage()
 	{
 		frame.dispose();
@@ -164,7 +197,7 @@ public class bankAccountUI {
 	//Creates text fields
 	public void createDepositTF() {
 		textField = new JTextField();
-		textField.setBounds(133, 104, 142, 26);
+		textField.setBounds(133, 107, 142, 26);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
 	}
@@ -176,8 +209,10 @@ public class bankAccountUI {
 		textField_1.setColumns(10);
 	}
 	
-	
-	
-	
+	public void createCustomerIDTF() {
+		JLabel customerIDLabel = new JLabel("Customer ID");
+		customerIDLabel.setBounds(29, 20, 82, 16);
+		frame.getContentPane().add(customerIDLabel);
+	}
 	
 }
